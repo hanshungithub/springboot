@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.type.AnnotatedTypeMetadata;
+import org.springframework.core.type.ClassMetadata;
 import org.springframework.util.MultiValueMap;
 
 import java.util.ArrayList;
@@ -17,6 +18,10 @@ public class TestCondition implements Condition {
 	@SuppressWarnings("unchecked")
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+		if (metadata instanceof ClassMetadata) {
+			ClassMetadata classMetadata = (ClassMetadata) metadata;
+			//log.error(classMetadata.getClassName());
+		}
 		boolean annotated = metadata.isAnnotated(Conditional.class.getName());
 		if (annotated) {
 			MultiValueMap<String, Object> attributes = metadata.getAllAnnotationAttributes(Conditional.class.getName(), true);
