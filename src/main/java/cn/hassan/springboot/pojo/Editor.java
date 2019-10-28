@@ -12,4 +12,12 @@ import lombok.Data;
 public class Editor {
 	private String name;
 	private int age;
+
+	public void init() {
+		System.out.println("start init editor ...");
+	}
+
+	public void destroy() {
+		System.out.println("destroy current bean ...");
+	}
 }
